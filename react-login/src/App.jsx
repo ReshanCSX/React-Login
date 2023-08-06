@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from "react"
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
+export default function App(){
+
+  const [userInfo, setUserInfo] = useState({username: '', password: '', checked: false})
+
+  function handleChange(event){
+
+    const {name, value, type, checked} = event.target
+
+    setUserInfo(prevFormData => ({
+      ...prevFormData,
+      [name] : type === "checkbox" ? checked : value
+    }))
+  }
+
+  function handleSubmit(event){
+    event.preventDefault()
+
+    console.log(userInfo)
+  }
+
+  return(
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h4>Login Page</h4>
+
+      <form className="form" onSubmit={handleSubmit}>
+        <input type="text" className="form--input"  placeholder="Username" name="username" onChange={handleChange} value={userInfo.username}/>
+        <input type="password" className="form--input"  placeholder="Password" name="password" onChange={handleChange} value={userInfo.password}/>
+        <input id="checkbox" type="checkbox" className="form--checkbox"  onChange={handleChange} name="checked" checked={userInfo.checked}/>
+        <label htmlFor="checkbox">Remember Me</label>
+        <button>Login</button>
+      </form>
     </>
   )
 }
-
-export default App
