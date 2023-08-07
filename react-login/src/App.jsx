@@ -23,16 +23,18 @@ export default function App(){
   }
 
   return(
-    <>
-      <h4>Login Page</h4>
+    <div id="form--container">
+      <h4 className="form--heading">Sign In</h4>
 
       <form className="form" onSubmit={handleSubmit}>
         <input type="text" className="form--input"  placeholder="Username" name="username" onChange={handleChange} value={userInfo.username}/>
         <input type="password" className="form--input"  placeholder="Password" name="password" onChange={handleChange} value={userInfo.password}/>
+        
         <input id="checkbox" type="checkbox" className="form--checkbox"  onChange={handleChange} name="checked" checked={userInfo.checked}/>
         <label htmlFor="checkbox">Remember Me</label>
-        <button>Login</button>
+
+        <button className="form--button">Login</button>
       </form>
-    </>
+    </div>
   )
 }
